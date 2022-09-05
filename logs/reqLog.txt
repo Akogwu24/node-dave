@@ -14,3 +14,5 @@
 20220828	02:35:48	3912a52d-300c-4e61-a60b-ebc375a7d488	POST	undefined	/auth
 20220828	02:36:24	a7a2fa1d-4e64-4883-a6a8-fecf6c238805	POST	undefined	/auth
 20220828	02:39:31	ab15374f-e5d9-4d59-93d5-538d29540d51	POST	undefined	/auth
+20220905	06:41:05	255a098a-6480-43f7-ac9f-a431e66603c8	PUT	undefined	/employees
+20220905	06:41:21	afd54b5f-1c47-4b10-b3b1-fe351625d146	POST	undefined	/employees
