@@ -5,10 +5,17 @@ const cors = require('cors');
 const corsOptions = require('./config/corsOptions');
 const { logger } = require('./middleware/logEvents');
 const errorHandler = require('./middleware/errorHandler');
+const verifyJWT = require('./middleware/verifyJWT');
+const cookiePaser = require('cookie-parser');
+const credentials = require('./middleware/credentials');
 const PORT = process.env.PORT || 3500;
 
 //custom middleware
 app.use(logger);
+
+//handle options credentials check before CORS
+//and fetch cookies credentials requirement
+app.use(credentials);
 
 //CORS cross origin resource sharing
 app.use(cors(corsOptions));
@@ -19,13 +26,21 @@ app.use(express.urlencoded({ extended: false }));
 // build in midlleware for json
 app.use(express.json());
 
+//middleware for cookie
+app.use(cookiePaser());
+
 //serve static files
 app.use('/', express.static(path.join(__dirname, '/public')));
 
-// routes
+//public routes
 app.use('/', require('./routes/root'));
 app.use('/register', require('./routes/register'));
 app.use('/auth', require('./routes/auth'));
+//refreshToken
+app.use('/refresh', require('./routes/refresh'));
+app.use('/logout', require('./routes/logout'));
+//proteted routes
+app.use(verifyJWT);
 app.use('/employees', require('./routes/api/employees'));
 
 //catch all
