@@ -16,10 +16,10 @@ const handleLogout = async (req, res) => {
 
   const refreshToken = cookies.jwt;
 
-  //is refresh token in DB
+  //is refresh token in DB?
   const foundUser = userDB.users.find((person) => person.refreshToken === refreshToken);
   if (!foundUser) {
-    res.cookies('jwt', { httpOnly: true, secure: true, sameSite: 'None' });
+    res.clearCookie('jwt', { httpOnly: true, secure: true, sameSite: 'None' });
     return res.sendStatus(204);
   }
   // delete refresh token from db

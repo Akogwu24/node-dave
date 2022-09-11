@@ -25,6 +25,7 @@ const handleLogin = async (req, res) => {
 
     const refreshToken = jwt.sign({ username: foundUser.username }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1d' });
 
+    //saving current user  with refresh token
     const otherUsers = userDB.users.filter((person) => person.username !== foundUser.name);
     const currentUser = { ...foundUser, refreshToken };
     userDB.setUsers([...otherUsers, currentUser]);
